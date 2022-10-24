@@ -20,8 +20,12 @@ ke2 = 0.0180311 * 10
 
 theta = np.array([ka1, ka_1, ka2, kb1, kb_1, kb2, kc1, kc_1, kc2, kd1, kd_1, kd2, ke1, ke_1, ke2])
 
+n_mirna = 100
+k_dec = 0.1
+k_inc = 10
+
 #initialised at initial values for test tube model
-init_dicer = 5 * 10
+init_dicer = 5 * n_mirna * 0.01#* 5
 init_premirna1 = 1
 init_premirna2 = 1
 init_premirna3 = 1
