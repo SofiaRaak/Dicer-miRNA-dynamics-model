@@ -1,3 +1,10 @@
+import params
+import numpy as np
+from scipy.optimize import curve_fit
+
+def run_test():
+    print("utils imported OK!")
+
 def make_inits(num_preMiR, pMiR, dicer_pMiR, miR, dicer):
     """
     Function to generate vector of initial concentrations for all species.
@@ -117,3 +124,44 @@ def makeModel(ODEs):
         return ''' + ODEs[1] 
     
     return model
+
+def Error(data_values, model_values, time, ts):
+    """
+    A function to calculate the relative error of ODE model values against
+    data values
+    
+    Args
+    data_values (1darray):   Array containing data values
+    model_values (1darray):  Array containing model values
+    time (1darray):          Array containing time points in dataset
+    ts (1darray):            Array containing time steps in model
+    
+    Returns:
+    error (float)
+    """
+    
+    WT = np.interp(time, ts, model_values)
+    
+    return np.sum(np.power((data_values - WT), 2))
+
+
+
+
+def curveError(model_values, time, ts):
+    """
+    Error function for ODE model optimisation based on predicted values from 
+    scipy.optimize.curve_fit
+    """
+    
+    #curve fit "data" values
+    time_data = params.time
+    vals_data = params.WT_data
+    
+    WT_popt, WT_pcov = curve_fit(lambda t, a, b: a * np.log(t) + b,
+                            time_data[1:], vals_data[1:]) 
+    
+    WT_pred = np.zeros(int(len(time)-1))
+    for i in range(len(WT_pred)):
+        WT_pred[i] = WT_popt[0] * np.log(time[i+1]) + WT_popt[1]
+        
+    return Error(WT_pred, model_values, time[1:], ts)

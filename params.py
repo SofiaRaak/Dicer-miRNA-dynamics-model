@@ -1,5 +1,9 @@
 import numpy as np
 
+#experimental data from figure 1, tsutsumi et al.
+WT_data = np.array([0, 0.11144276160503169, 0.16566679779700877, 0.23905143587726366, 0.2954956726986665, 0.2946793863099961])
+time = np.array([0, 5, 10, 20, 40, 60])
+
 Kd_wt = 25.4 #nM, experimental values
 
 ka1 = 1.0285752
@@ -25,7 +29,7 @@ k_dec = 0.1
 k_inc = 10
 
 #initialised at initial values for test tube model
-init_dicer = 5 * n_mirna * 0.01#* 5
+init_dicer = 5 #* n_mirna * 0.01#* 5
 init_premirna1 = 1
 init_premirna2 = 1
 init_premirna3 = 1

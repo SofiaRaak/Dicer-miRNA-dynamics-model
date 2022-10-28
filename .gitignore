@@ -9,3 +9,5 @@ db_build.ipynb
 figures/dynamic_model.svg
 modelling_output.db
 output/
+__pycache__
+.ipynb_checkpoints/
