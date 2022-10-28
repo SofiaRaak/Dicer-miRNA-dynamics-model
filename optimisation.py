@@ -3,6 +3,7 @@ import pandas as pd
 from scipy.optimize import minimize
 from scipy.optimize import curve_fit
 from scipy.integrate import solve_ivp
+from scipy.optimize import approx_fprime
 import params
 import utils
 from tqdm import tqdm
@@ -57,22 +58,44 @@ def ErrorODE(theta, time, data_values = None):
         return utils.curveError(diced, time, sol.t)
     else:
         return utils.Error(data_values, diced, time, sol.t)
+    
+#callable jac function
+fprime1 = lambda x, time, data: approx_fprime(x, ErrorODE, 0.01, time, data)
+fprime2 = lambda x, time: approx_fprime(x, ErrorODE, 0.01, time)
 
-for i in tqdm(range(len(solvers))):
-    
-    utils.run_test()
-    data_res = minimize(ErrorODE, theta, args = (params.time, params.WT_data),\
-                        method = solvers[i], bounds=bounds)
-    
-    extr_res = minimize(ErrorODE, theta, args = (params.time), method = solvers[i], \
-                       bounds=bounds)
-    
-    data_dict['data_'+solvers[i]] = data_res.x
-    data_dict['extr_'+solvers[i]] = extr_res.x
-    
-    solver_array.append(solvers[i])
-    data_array[i] = ErrorODE(data_res.x, params.time, params.WT_data)
-    extr_array[i] = ErrorODE(extr_res.x, params.time)
+#ignore runtime warnings
+import warnings
+with warnings.catch_warnings():
+    warnings.simplefilter('ignore', RuntimeWarning)
+
+    for i in tqdm(range(len(solvers))):
+        
+        utils.run_test()
+        
+        if solvers[i] ==  'Newton-CG' \
+        or solvers[i] == 'trust-ncg' \
+        or solvers[i] == 'dogleg' \
+        or solvers[i] == 'trust-exact' \
+        or solvers[i] == 'trust-krylov':
+            data_res = minimize(ErrorODE, theta, args = (params.time, params.WT_data),\
+                                method = solvers[i], bounds=bounds, jac=fprime1)
+        
+            extr_res = minimize(ErrorODE, theta, args = (params.time), method = solvers[i], \
+                               bounds=bounds, jac=fprime2)
+            
+        else:      
+            data_res = minimize(ErrorODE, theta, args = (params.time, params.WT_data),\
+                                method = solvers[i], bounds=bounds, jac="2-point")
+        
+            extr_res = minimize(ErrorODE, theta, args = (params.time), method = solvers[i], \
+                               bounds=bounds, jac="2-point")
+        
+        data_dict['data_'+solvers[i]] = data_res.x
+        data_dict['extr_'+solvers[i]] = extr_res.x
+        
+        solver_array.append(solvers[i])
+        data_array[i] = ErrorODE(data_res.x, params.time, params.WT_data)
+        extr_array[i] = ErrorODE(extr_res.x, params.time)
     
 df_error = pd.DataFrame(data_dict)
 df_arrays = pd.DataFrame({"solver": solver_array, "data_points": data_array, "extrapolated": extr_array})

@@ -2,6 +2,7 @@ import params
 import numpy as np
 from scipy.optimize import curve_fit
 
+
 def run_test():
     print("utils imported OK!")
 
