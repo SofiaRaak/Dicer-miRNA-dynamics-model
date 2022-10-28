@@ -30,11 +30,11 @@ The model is designed as a system of ordinary differential equations where each 
 
 where
 
-* $pMiR_i$ is the concentration of pre-miRNA species at index $i$ ($nM$)
-* $Dicer\_pMiR_i$ is the concentration of pre-miRNA Dicer complexes at index $i$ ($nM$)
-* $MiR_i$ is the concentration of mature miRNA species at index $i$ ($nM$)
-* $Dicer$ is the concentraton of free Dicer in the system ($nM$)
+* $pMiR_i$ is the concentration of pre-miRNA species at index $i$ $(nM)$
+* $Dicer\_pMiR_i$ is the concentration of pre-miRNA Dicer complexes at index $i$ $(nM)$
+* $MiR_i$ is the concentration of mature miRNA species at index $i$ $(nM)$
+* $Dicer$ is the concentraton of free Dicer in the system $(nM)$
 * $n$ is the number of miRNA species in the system
-* $k_{a_i}$ is the rate of association of pre-miRNA at index $i$ and Dicer ($s^{-1}$)
-* $k_{b_i}$ is the rate of dissociation of pre-miRNA at index $i$ and Dicer ($s^{-1}$)
-* $k_{c_i}$ is the maturation rate of miRNA at index $i$ ($s^{-1}$
+* $k_{a_i}$ is the rate of association of pre-miRNA at index $i$ and Dicer $(s^{-1})$
+* $k_{b_i}$ is the rate of dissociation of pre-miRNA at index $i$ and Dicer $(s^{-1})$
+* $k_{c_i}$ is the maturation rate of miRNA at index $i$ $(s^{-1})$
