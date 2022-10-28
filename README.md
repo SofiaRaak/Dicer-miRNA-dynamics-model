@@ -1,3 +1,5 @@
+
+
 # Dynamic miR-Dicer model
 
 Computational model describing interactions between a single pool of Dicer and n pre-miRNAs and their maturation.
@@ -12,17 +14,23 @@ The model is designed as a system of ordinary differential equations where each 
 
 ```math
 \frac{dpMiR_i}{dt} = Dicer\_pMiR_i*k_{b_i} - Dicer*pMiR_i*k_{a_i}
+```
 
+```math
 \frac{dDicer\_pMiR_i}{dt} = Dicer*pMiR_i*k_{a_i} - Dicer\_pMiR_i*(k_{b_i}+k_{c_i})
+```
 
+```math
 \frac{dMiR_i}{dt} = Dicer\_pMiR_i*k_{c_i}
+```
 
+```math
 \frac{dDicer}{dt} = \sum^{n}_{i=0} Dicer\_pMiR_i*(k_{b_i}+k_{c_i}) - \sum^{n}_{i=0} Dicer*pMiR_i*k_{a_i}
 ```
 
 where
 
-* $`pMiR_i`$ is the concentration of pre-miRNA species at index $`i`$ ($`nM`$)
+* `$pMiR_i$` is the concentration of pre-miRNA species at index $`i`$ ($`nM`$)
 * $`Dicer\_pMiR_i`$ is the concentration of pre-miRNA Dicer complexes at index &`i`& ($`nM`$)
 * $`MiR_i`$ is the concentration of mature miRNA species at index $`i`$ ($`nM`$
 * $`Dicer`$ is the concentraton of free Dicer in the system ($`nM`$)
