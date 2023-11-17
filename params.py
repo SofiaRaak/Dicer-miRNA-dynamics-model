@@ -19,24 +19,14 @@ WT_dicer_init = 0
 short_dicer_init = 0
 
 #optimised from CMA
-ka1	= np.exp(0.8391483807362488)
-ka2	= np.exp(2.794472786988102)
-kc1	= np.exp(-4.210009587029023)
-kc2	= np.exp(-2.1295340085167678)
-kd	= np.exp(-1.8164414600494811)
+ka1	= np.exp(-4.91241215e+00)
+ka2	= np.exp(-3.15282165e+00)
+kc1	= np.exp(-4.43307349e+00)
+kc2	= np.exp(-6.44167537e+03)
+kd1	= np.exp(1.49475764e+00)
+kd2 = np.exp(-2.86279214e+00)
 
-#ka1 = 5
-#k1 = 1.0285752
-#kb1 = Kd_wt * ka1
-#ka2 = 5
-#k2 = 0.86167316
-#kb2 = Kd_short * ka2
-#kc1 = 0.1
-#kc2 = 0.1
-#kd = 5
-#k3 = 0.0180311
-
-theta = [ka1, ka2, kc1, kc2, kd]
+theta = [ka1, ka2, kc1, kc2, kd1, kd2]
 
 init_pMiR1 = 1
 init_pMiR2 = 1
