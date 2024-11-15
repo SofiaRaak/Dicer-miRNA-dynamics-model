@@ -26,11 +26,11 @@ The model is designed as a system of ordinary differential equations where each 
 ```
 
 ```math
-\frac{dpMiR_i\_Dicer^*}{dt} = pMiR_i\_Dicer * k_{c_i}
+\frac{dpMiR_i\_Dicer^*}{dt} = pMiR_i * Dicer * k_{c_i}
 ```
 
 ```math
-\frac{dmiR_i}{dt} = pMIR_i\_Dicer * k_{d_i}
+\frac{dmiR_i}{dt} = pMiR_i\_Dicer * k_{d_i}
 ```
 
 where
