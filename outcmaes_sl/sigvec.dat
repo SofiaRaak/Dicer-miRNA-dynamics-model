@@ -1,0 +1,5 @@
+<<<<<<< HEAD
+% # columns="iteration, evaluation, sigma, beta, void,  sigvec==sigma_vec.scaling factors from diagonal decoding", seed=949968, Thu Nov 28 09:15:58 2024, <python>{}</python>
+=======
+% # columns="iteration, evaluation, sigma, beta, void,  sigvec==sigma_vec.scaling factors from diagonal decoding", seed=949968, Thu Nov 28 09:15:58 2024, <python>{}</python>
+>>>>>>> abb4912e57073ab958620020a1bd3cb035dc5e9d
